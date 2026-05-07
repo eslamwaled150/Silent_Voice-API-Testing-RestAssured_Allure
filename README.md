@@ -75,4 +75,3 @@ This project uses **GitHub Actions** to automatically run tests on every push or
 
 The Allure report is published to **GitHub Pages** after each run.
 
-🔗 **Live Report:** [https://eslamwaled150.github.io/Silent_Voice-API-Testing-Project/](https://eslamwaled150.github.io/Silent_Voice-API-Testing-Project/)
