@@ -84,6 +84,12 @@
 | 5 | Transcribe wrong extension (MP3) | ❌ Negative | `400` |
 
 ---
+## 🎥 Test Run Recording
+
+▶️ [Watch the full test run on Google Drive](https://drive.google.com/file/d/1tXuGXQmJSmcgYEvYXnQcbptQzD5WMT2l/view?usp=sharing)
+
+---
+
 
 ## 📊 Test Results Summary
 
