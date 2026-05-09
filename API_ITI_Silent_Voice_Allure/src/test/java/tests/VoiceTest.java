@@ -33,7 +33,7 @@ public class VoiceTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Transcribe valid WAV file — expects 200 OK and voiceID")
     public void testTranscribeAudio() {
-        File audioFile = new File("src/test/resources/koko.wav");
+    File audioFile = new File(getClass().getClassLoader().getResource("koko.wav").getFile());
 
         voiceID = given()
                 .header("Authorization", "Bearer " + token)
