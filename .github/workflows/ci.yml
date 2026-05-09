@@ -22,8 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Run Tests
-        working-directory: API_ITI_Silent_Voice_Allure/allure_project  
-        run: mvn clean test
+        run: mvn clean test -f API_ITI_Silent_Voice_Allure/pom.xml
 
       - name: Get Allure history
         uses: actions/checkout@v4
