@@ -31,7 +31,6 @@ public class BaseTest {
     }
 
 
-    /** POST JSON without token */
     protected RequestSpecification jsonRequest() {
         return given()
                 .contentType(ContentType.JSON);
