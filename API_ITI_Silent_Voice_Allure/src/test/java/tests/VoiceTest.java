@@ -28,7 +28,7 @@ public class VoiceTest extends BaseTest {
         }
     }
 
-    @Test(priority = 8)
+    @Test(priority = 13)
     @Story("Transcribe Audio")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Transcribe valid WAV file — expects 200 OK and voiceID")
@@ -50,7 +50,7 @@ public class VoiceTest extends BaseTest {
         System.out.println("Audio transcribed, voiceID: " + voiceID);
     }
 
-    @Test(priority = 9)
+    @Test(priority = 14)
     @Story("Voice History")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get voice history — expects 200 OK and non-empty array")
@@ -66,7 +66,7 @@ public class VoiceTest extends BaseTest {
         System.out.println("Voice history retrieved");
     }
 
-    @Test(priority = 10)
+    @Test(priority = 15)
     @Story("Get Voice by ID")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get voice record by valid ID — expects 200 OK and correct voiceID")
@@ -83,7 +83,7 @@ public class VoiceTest extends BaseTest {
         System.out.println("Voice by ID retrieved: " + voiceID);
     }
 
-    @Test(priority = 11)
+    @Test(priority = 16)
     @Story("Delete Voice")
     @Severity(SeverityLevel.NORMAL)
     @Description("Delete voice record by valid ID — expects 200 OK and success message")
@@ -99,7 +99,7 @@ public class VoiceTest extends BaseTest {
         System.out.println("Voice deleted: " + voiceID);
     }
 
-    @Test(priority = 12)
+    @Test(priority = 17)
     @Story("Transcribe Audio")
     @Severity(SeverityLevel.NORMAL)
     @Description("Transcribe wrong extension (MP3) — expects 400 Bad Request")
