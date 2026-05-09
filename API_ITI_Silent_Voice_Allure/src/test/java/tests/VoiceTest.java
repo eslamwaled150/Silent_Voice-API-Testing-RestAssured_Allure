@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.*;
 @Feature("Voice Transcription")
 public class VoiceTest extends BaseTest {
 
-    // Helper — create fake MP3 bytes in memory (no file needed)
     private File createFakeMP3() {
         try {
             File file = File.createTempFile("fake_audio", ".mp3");
@@ -33,8 +32,7 @@ public class VoiceTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Transcribe valid WAV file — expects 200 OK and voiceID")
     public void testTranscribeAudio() {
-    // Use ClassLoader to load from resources — works EVERYWHERE
-    File audioFile = new File(getClass().getClassLoader().getResource("koko.wav").getFile());
+        File audioFile = new File("src/test/resources/koko.wav");
 
         voiceID = given()
                 .header("Authorization", "Bearer " + token)
@@ -48,7 +46,7 @@ public class VoiceTest extends BaseTest {
                 .body("voiceID", notNullValue())
                 .extract().path("voiceID");
 
-        System.out.println("Audio transcribed, voiceID: " + voiceID);
+        log.info("Audio transcribed, voiceID: {}", voiceID);
     }
 
     @Test(priority = 14)
@@ -64,7 +62,7 @@ public class VoiceTest extends BaseTest {
                 .statusCode(200)
                 .body("$", not(empty()));
 
-        System.out.println("Voice history retrieved");
+        log.info("Voice history retrieved");
     }
 
     @Test(priority = 15)
@@ -81,7 +79,7 @@ public class VoiceTest extends BaseTest {
                 .body("voiceID", equalTo(voiceID))
                 .body("transcriptedTextEn", notNullValue());
 
-        System.out.println("Voice by ID retrieved: " + voiceID);
+        log.info("Voice by ID retrieved: {}", voiceID);
     }
 
     @Test(priority = 16)
@@ -97,7 +95,7 @@ public class VoiceTest extends BaseTest {
                 .statusCode(200)
                 .body("message", equalTo("Voice record deleted successfully."));
 
-        System.out.println("Voice deleted: " + voiceID);
+        log.info("Voice deleted: {}", voiceID);
     }
 
     @Test(priority = 17)
@@ -116,6 +114,6 @@ public class VoiceTest extends BaseTest {
                 .then()
                 .statusCode(400);
 
-        System.out.println("Wrong extension (MP3) correctly rejected");
+        log.info("Wrong extension (MP3) correctly rejected");
     }
 }
