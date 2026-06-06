@@ -31,7 +31,7 @@ public class AuthTest extends BaseTest {
                 .post("/api/Auth/register")
                 .then()
                 .statusCode(200)
-                .body("token", nullValue())
+                .body("token", equalTo(""))
                 .body("message", containsString("OTP"));
 
         log.info("Registered: {}", registeredEmail);
