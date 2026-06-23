@@ -135,7 +135,7 @@
 
 ## 🎥 Test Run Recording
 
-▶️ [Watch the full test run on Google Drive](https://drive.google.com/file/d/1tXuGXQmJSmcgYEvYXnQcbptQzD5WMT2l/view?usp=sharing)
+▶️ [Watch the full test run on Google Drive](https://drive.google.com/file/d/1LAF5JA-i1hGLL-4GoHcbuTFTT8Dq0hcY/view?usp=drive_link)
 
 ---
 
