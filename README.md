@@ -138,7 +138,7 @@ Silent_Voice-API-Testing-RestAssured_Allure/
 
 | Type       | Link |
 |------------|------|
-| Automation | [Watch Automation Demo](https://drive.google.com/file/d/1tXuGXQmJSmcgYEvYXnQcbptQzD5WMT2l/view?usp=sharing) |
+| Automation | [Watch Automation Demo](https://drive.google.com/file/d/1LAF5JA-i1hGLL-4GoHcbuTFTT8Dq0hcY/view) |
 | Manual     | [Watch Manual Demo](https://drive.google.com/file/d/102rnqjeWIsmO3sLSOeP_YXiMNVUlvKQU/view) |
 
 ---
