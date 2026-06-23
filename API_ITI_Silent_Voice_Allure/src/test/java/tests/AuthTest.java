@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.*;
 public class AuthTest extends BaseTest {
 
     @Test(priority = 1)
-    @Story("Register")
+    @Story("Register Positive TC")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Register a new user with valid data — expects 200 OK and OTP message")
     public void testRegisterValidData() {
@@ -31,7 +31,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 2, dependsOnMethods = "testRegisterValidData")
-    @Story("Register")
+    @Story("Register Positive TC")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Confirm email using fixed OTP — expects 200 OK and confirmed message")
     public void testConfirmEmailFixedOtp() {
@@ -49,7 +49,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 3, dependsOnMethods = "testConfirmEmailFixedOtp")
-    @Story("Login")
+    @Story("Login Positive TC")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Login with valid credentials — expects 200 OK and JWT token")
     public void testLoginValidCredentials() {
@@ -69,7 +69,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 4, dependsOnMethods = "testLoginValidCredentials")
-    @Story("Forgot Password")
+    @Story("Forgot Password Positive TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Forgot password with registered email — expects 200 OK")
     public void testForgotPasswordValidEmail() {
@@ -84,7 +84,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 5, dependsOnMethods = "testLoginValidCredentials")
-    @Story("Login")
+    @Story("Login Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Login with wrong password — expects 400 or 401")
     public void testLoginWrongPassword() {
@@ -101,7 +101,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 6, dependsOnMethods = "testRegisterValidData")
-    @Story("Register")
+    @Story("Register Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Register with already-used email — expects 400 Bad Request")
     public void testRegisterDuplicateEmail() {
@@ -118,7 +118,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 7)
-    @Story("Login")
+    @Story("Login Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Login with non-existing email — expects 400 or 404")
     public void testLoginNonExistingEmail() {
@@ -136,7 +136,7 @@ public class AuthTest extends BaseTest {
 
 
     @Test(priority = 8)
-    @Story("Register")
+    @Story("Register Negative TC")
     @Severity(SeverityLevel.MINOR)
     @Description("Register with exceeded fName length — expects 400 Bad Request")
     public void testRegisterExceededFName() {
@@ -153,7 +153,7 @@ public class AuthTest extends BaseTest {
     }
 
     @Test(priority = 9, dependsOnMethods = "testRegisterValidData")
-    @Story("Register")
+    @Story("Register Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Confirm email with wrong OTP — expects 400 Bad Request")
     public void testConfirmEmailWrongOtp() {
