@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="22" passed="22" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-06-23T15:55:39 EEST" name="SilentVoice_Suite" finished-at="2026-06-23T15:55:56 EEST" duration-ms="16237">
+    <groups>
+    </groups>
+    <test started-at="2026-06-23T15:55:39 EEST" name="Silent Voice API Tests" finished-at="2026-06-23T15:55:56 EEST" duration-ms="16237">
+      <class name="tests.AuthTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:39 EEST" name="setup" finished-at="2026-06-23T15:55:39 EEST" duration-ms="286" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="loginBeforeClass()[pri:0, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:39 EEST" name="loginBeforeClass" finished-at="2026-06-23T15:55:42 EEST" duration-ms="2299" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginBeforeClass -->
+        <test-method signature="testRegisterValidData()[pri:1, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:42 EEST" name="testRegisterValidData" finished-at="2026-06-23T15:55:44 EEST" duration-ms="1922" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRegisterValidData -->
+        <test-method signature="testConfirmEmailFixedOtp()[pri:2, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:44 EEST" name="testConfirmEmailFixedOtp" finished-at="2026-06-23T15:55:44 EEST" depends-on-methods="tests.AuthTest.testRegisterValidData" duration-ms="355" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConfirmEmailFixedOtp -->
+        <test-method signature="testLoginValidCredentials()[pri:3, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:44 EEST" name="testLoginValidCredentials" finished-at="2026-06-23T15:55:45 EEST" depends-on-methods="tests.AuthTest.testConfirmEmailFixedOtp" duration-ms="556" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginValidCredentials -->
+        <test-method signature="testForgotPasswordValidEmail()[pri:4, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:45 EEST" name="testForgotPasswordValidEmail" finished-at="2026-06-23T15:55:46 EEST" depends-on-methods="tests.AuthTest.testLoginValidCredentials" duration-ms="1086" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testForgotPasswordValidEmail -->
+        <test-method signature="testLoginWrongPassword()[pri:5, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:46 EEST" name="testLoginWrongPassword" finished-at="2026-06-23T15:55:46 EEST" depends-on-methods="tests.AuthTest.testLoginValidCredentials" duration-ms="440" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginWrongPassword -->
+        <test-method signature="testRegisterDuplicateEmail()[pri:6, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:46 EEST" name="testRegisterDuplicateEmail" finished-at="2026-06-23T15:55:46 EEST" depends-on-methods="tests.AuthTest.testRegisterValidData" duration-ms="239" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRegisterDuplicateEmail -->
+        <test-method signature="testLoginNonExistingEmail()[pri:7, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:46 EEST" name="testLoginNonExistingEmail" finished-at="2026-06-23T15:55:47 EEST" duration-ms="254" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoginNonExistingEmail -->
+        <test-method signature="testRegisterExceededFName()[pri:8, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:47 EEST" name="testRegisterExceededFName" finished-at="2026-06-23T15:55:47 EEST" duration-ms="222" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRegisterExceededFName -->
+        <test-method signature="testConfirmEmailWrongOtp()[pri:9, instance:tests.AuthTest@64337702]" started-at="2026-06-23T15:55:47 EEST" name="testConfirmEmailWrongOtp" finished-at="2026-06-23T15:55:47 EEST" depends-on-methods="tests.AuthTest.testRegisterValidData" duration-ms="242" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConfirmEmailWrongOtp -->
+      </class> <!-- tests.AuthTest -->
+      <class name="tests.VoiceTest">
+        <test-method signature="testTranscribeAudio()[pri:16, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:49 EEST" name="testTranscribeAudio" finished-at="2026-06-23T15:55:52 EEST" duration-ms="2815" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranscribeAudio -->
+        <test-method is-config="true" signature="loginBeforeClass()[pri:0, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:49 EEST" name="loginBeforeClass" finished-at="2026-06-23T15:55:49 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginBeforeClass -->
+        <test-method signature="testGetVoiceHistory()[pri:17, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:52 EEST" name="testGetVoiceHistory" finished-at="2026-06-23T15:55:52 EEST" duration-ms="305" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetVoiceHistory -->
+        <test-method signature="testGetVoiceById()[pri:18, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:52 EEST" name="testGetVoiceById" finished-at="2026-06-23T15:55:52 EEST" duration-ms="331" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetVoiceById -->
+        <test-method signature="testDeleteVoice()[pri:19, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:52 EEST" name="testDeleteVoice" finished-at="2026-06-23T15:55:53 EEST" duration-ms="381" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteVoice -->
+        <test-method signature="testTranscribeWrongExtension()[pri:20, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:53 EEST" name="testTranscribeWrongExtension" finished-at="2026-06-23T15:55:53 EEST" duration-ms="587" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranscribeWrongExtension -->
+        <test-method signature="testGetAudioWrongFilename()[pri:21, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:53 EEST" name="testGetAudioWrongFilename" finished-at="2026-06-23T15:55:54 EEST" duration-ms="225" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetAudioWrongFilename -->
+        <test-method signature="testTranscribeWrongLanguage()[pri:22, instance:tests.VoiceTest@6273c5a4]" started-at="2026-06-23T15:55:54 EEST" name="testTranscribeWrongLanguage" finished-at="2026-06-23T15:55:56 EEST" duration-ms="2075" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTranscribeWrongLanguage -->
+      </class> <!-- tests.VoiceTest -->
+      <class name="tests.SignTest">
+        <test-method is-config="true" signature="loginBeforeClass()[pri:0, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:47 EEST" name="loginBeforeClass" finished-at="2026-06-23T15:55:47 EEST" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginBeforeClass -->
+        <test-method signature="testSaveSign()[pri:10, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:47 EEST" name="testSaveSign" finished-at="2026-06-23T15:55:48 EEST" duration-ms="554" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSaveSign -->
+        <test-method signature="testGetSignHistory()[pri:11, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:48 EEST" name="testGetSignHistory" finished-at="2026-06-23T15:55:48 EEST" duration-ms="267" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetSignHistory -->
+        <test-method signature="testGetSignById()[pri:12, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:48 EEST" name="testGetSignById" finished-at="2026-06-23T15:55:48 EEST" duration-ms="272" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetSignById -->
+        <test-method signature="testGetSignInvalidId()[pri:13, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:48 EEST" name="testGetSignInvalidId" finished-at="2026-06-23T15:55:48 EEST" duration-ms="225" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetSignInvalidId -->
+        <test-method signature="testGetSignHistoryNoToken()[pri:14, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:48 EEST" name="testGetSignHistoryNoToken" finished-at="2026-06-23T15:55:49 EEST" duration-ms="226" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetSignHistoryNoToken -->
+        <test-method signature="testSaveSignEmptySentence()[pri:15, instance:tests.SignTest@5f2f577]" started-at="2026-06-23T15:55:49 EEST" name="testSaveSignEmptySentence" finished-at="2026-06-23T15:55:49 EEST" duration-ms="235" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSaveSignEmptySentence -->
+      </class> <!-- tests.SignTest -->
+    </test> <!-- Silent Voice API Tests -->
+  </suite> <!-- SilentVoice_Suite -->
+</testng-results>

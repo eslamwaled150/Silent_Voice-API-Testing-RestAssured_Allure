@@ -1,5 +1,6 @@
 package tests;
 
+import Pages.Auth;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.*;
@@ -15,18 +16,10 @@ public class AuthTest extends BaseTest {
     public void testRegisterValidData() {
         registeredEmail = "eslam_auto_" + System.currentTimeMillis() + "@minitts.net";
 
-        String body = String.format("""
-            {
-              "fName": "Eslam",
-              "lName": "Waled",
-              "email": "%s",
-              "password": "%s",
-              "conPassword": "%s"
-            }
-            """, registeredEmail, PASSWORD, PASSWORD);
+        Auth registerBody = new Auth("Eslam", "Waled", registeredEmail, PASSWORD, PASSWORD);
 
         jsonRequest()
-                .body(body)
+                .body(registerBody)
                 .when()
                 .post("/api/Auth/register")
                 .then()
@@ -42,17 +35,12 @@ public class AuthTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Confirm email using fixed OTP — expects 200 OK and confirmed message")
     public void testConfirmEmailFixedOtp() {
-        String body = String.format("""
-            {
-              "email": "%s",
-              "otp": "%s"
-            }
-            """, registeredEmail, FIXED_OTP);
+        Auth confirmBody = new Auth(registeredEmail, FIXED_OTP);
 
         jsonRequest()
-                .body(body)
+                .body(confirmBody)
                 .when()
-                .post("/api/Auth/confirm-email")
+                .post("/api/Auth/confirm-email-FO")
                 .then()
                 .statusCode(200)
                 .body("message", containsString("confirmed"));
@@ -65,15 +53,10 @@ public class AuthTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Login with valid credentials — expects 200 OK and JWT token")
     public void testLoginValidCredentials() {
-        String body = String.format("""
-            {
-              "email": "%s",
-              "password": "%s"
-            }
-            """, registeredEmail, PASSWORD);
+        Auth loginBody = new Auth(registeredEmail, PASSWORD, true);
 
         token = jsonRequest()
-                .body(body)
+                .body(loginBody)
                 .when()
                 .post("/api/Auth/login")
                 .then()
@@ -82,23 +65,33 @@ public class AuthTest extends BaseTest {
                 .body("token", notNullValue())
                 .extract().path("token");
 
-        log.info("Token saved: {}", token.substring(0, 20) + "...");
+        log.info("Token saved: {}...", token.substring(0, 20));
     }
 
-    @Test(priority = 4,dependsOnMethods = "testLoginValidCredentials")
+    @Test(priority = 4, dependsOnMethods = "testLoginValidCredentials")
+    @Story("Forgot Password")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Forgot password with registered email — expects 200 OK")
+    public void testForgotPasswordValidEmail() {
+        Auth body = new Auth(registeredEmail, null, false);
+        jsonRequest()
+                .body("{\"email\":\"" + registeredEmail + "\"}")
+                .when()
+                .post("/api/Auth/forgot-password")
+                .then()
+                .statusCode(200);
+        log.info("Forgot password OTP sent to: {}", registeredEmail);
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testLoginValidCredentials")
     @Story("Login")
     @Severity(SeverityLevel.NORMAL)
     @Description("Login with wrong password — expects 400 or 401")
     public void testLoginWrongPassword() {
-        String body = String.format("""
-            {
-              "email": "%s",
-              "password": "WrongPass99"
-            }
-            """, registeredEmail);
+        Auth loginBody = new Auth(registeredEmail, "WrongPass99", true);
 
         jsonRequest()
-                .body(body)
+                .body(loginBody)
                 .when()
                 .post("/api/Auth/login")
                 .then()
@@ -107,23 +100,15 @@ public class AuthTest extends BaseTest {
         log.info("Wrong password correctly rejected");
     }
 
-    @Test(priority = 5, dependsOnMethods = "testRegisterValidData")
+    @Test(priority = 6, dependsOnMethods = "testRegisterValidData")
     @Story("Register")
     @Severity(SeverityLevel.NORMAL)
     @Description("Register with already-used email — expects 400 Bad Request")
     public void testRegisterDuplicateEmail() {
-        String body = String.format("""
-            {
-              "fName": "Test",
-              "lName": "User",
-              "email": "%s",
-              "password": "%s",
-              "conPassword": "%s"
-            }
-            """, registeredEmail, PASSWORD, PASSWORD);
+        Auth registerBody = new Auth("Test", "User", registeredEmail, PASSWORD, PASSWORD);
 
         jsonRequest()
-                .body(body)
+                .body(registerBody)
                 .when()
                 .post("/api/Auth/register")
                 .then()
@@ -132,20 +117,15 @@ public class AuthTest extends BaseTest {
         log.info("Duplicate email correctly rejected");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 7)
     @Story("Login")
     @Severity(SeverityLevel.NORMAL)
     @Description("Login with non-existing email — expects 400 or 404")
     public void testLoginNonExistingEmail() {
-        String body = """
-        {
-          "email": "nonexisting_user@fake.com",
-          "password": "SomePass123"
-        }
-        """;
+        Auth loginBody = new Auth("nonexisting_user@fake.com", "SomePass123", true);
 
         jsonRequest()
-                .body(body)
+                .body(loginBody)
                 .when()
                 .post("/api/Auth/login")
                 .then()
@@ -153,5 +133,39 @@ public class AuthTest extends BaseTest {
 
         log.info("Non-existing email correctly rejected");
     }
+
+
+    @Test(priority = 8)
+    @Story("Register")
+    @Severity(SeverityLevel.MINOR)
+    @Description("Register with exceeded fName length — expects 400 Bad Request")
+    public void testRegisterExceededFName() {
+        Auth body = new Auth(
+                "AhmedSASASASAafdsfdsAhmedSASASASAafdsfdgfhfghfhfghgfsAhmedSASASASA",
+                "Ali", registeredEmail, PASSWORD, PASSWORD);
+        jsonRequest()
+                .body(body)
+                .when()
+                .post("/api/Auth/register")
+                .then()
+                .statusCode(400);
+        log.info("Exceeded fName correctly rejected");
+    }
+
+    @Test(priority = 9, dependsOnMethods = "testRegisterValidData")
+    @Story("Register")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Confirm email with wrong OTP — expects 400 Bad Request")
+    public void testConfirmEmailWrongOtp() {
+        Auth body = new Auth(registeredEmail, "000000");
+        jsonRequest()
+                .body(body)
+                .when()
+                .post("/api/Auth/confirm-email")
+                .then()
+                .statusCode(400);
+        log.info("Wrong OTP correctly rejected");
+    }
+
   }
 

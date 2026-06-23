@@ -1,5 +1,6 @@
 package tests;
 
+import Pages.Sign;
 import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
@@ -11,21 +12,17 @@ import static org.hamcrest.Matchers.*;
 @Feature("Sign Language")
 public class SignTest extends BaseTest {
 
-    @Test(priority = 7)
+    @Test(priority = 10)
     @Story("Save Sign")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Save a sign sentence — expects 200 OK and signID returned")
     public void testSaveSign() {
-        String body = """
-            {
-              "sentenceEn": "Hello World"
-            }
-            """;
+        Sign signBody = new Sign("Hello World");
 
         signID = given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .body(body)
+                .body(signBody)
                 .when()
                 .post("/api/Sign/save")
                 .then()
@@ -36,7 +33,7 @@ public class SignTest extends BaseTest {
         log.info("Sign saved with ID: {}", signID);
     }
 
-    @Test(priority = 8)
+    @Test(priority = 11)
     @Story("Sign History")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get sign history — expects 200 OK and non-empty array")
@@ -52,7 +49,7 @@ public class SignTest extends BaseTest {
         log.info("Sign history retrieved");
     }
 
-    @Test(priority = 9)
+    @Test(priority = 12)
     @Story("Get Sign by ID")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get sign by valid ID — expects 200 OK and correct signID")
@@ -68,7 +65,7 @@ public class SignTest extends BaseTest {
         log.info("Sign by ID retrieved: {}", signID);
     }
 
-    @Test(priority = 10)
+    @Test(priority = 13)
     @Story("Get Sign by ID")
     @Severity(SeverityLevel.MINOR)
     @Description("Get sign by non-existing ID (99999) — expects 400 or 404")
@@ -83,7 +80,7 @@ public class SignTest extends BaseTest {
         log.info("Non-existing sign correctly rejected");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 14)
     @Story("Sign History")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Get sign history without token — expects 401 Unauthorized")
@@ -96,21 +93,18 @@ public class SignTest extends BaseTest {
 
         log.info("Unauthorized correctly rejected");
     }
-    @Test(priority = 12)
+
+    @Test(priority = 15)
     @Story("Save Sign")
     @Severity(SeverityLevel.NORMAL)
     @Description("Save sign with empty sentence — expects 400 Bad Request")
     public void testSaveSignEmptySentence() {
-        String body = """
-        {
-          "sentenceEn": ""
-        }
-        """;
+        Sign signBody = new Sign("");
 
         given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .body(body)
+                .body(signBody)
                 .when()
                 .post("/api/Sign/save")
                 .then()
@@ -118,4 +112,6 @@ public class SignTest extends BaseTest {
 
         log.info("Empty sentence correctly rejected");
     }
-    }
+
+
+}

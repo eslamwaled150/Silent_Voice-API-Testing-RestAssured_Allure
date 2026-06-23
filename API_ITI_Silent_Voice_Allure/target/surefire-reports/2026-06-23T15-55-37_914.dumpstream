@@ -1,0 +1,5 @@
+# Created at 2026-06-23T15:55:38.284
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Silent_Voice-API-Testing-RestAssured_Allure\API_ITI_Silent_Voice_Allure\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

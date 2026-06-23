@@ -1,0 +1,7 @@
+Pages\Voice.class
+tests\VoiceTest.class
+tests\BaseTest.class
+Pages\Auth.class
+Pages\Sign.class
+tests\AuthTest.class
+tests\SignTest.class
