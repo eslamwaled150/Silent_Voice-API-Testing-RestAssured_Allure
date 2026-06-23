@@ -29,7 +29,7 @@ public class VoiceTest extends BaseTest {
     }
 
     @Test(priority = 16)
-    @Story("Transcribe Audio")
+    @Story("Transcribe Audio - Positive TC")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Transcribe valid WAV file — expects 200 OK and voiceID")
     public void testTranscribeAudio() {
@@ -52,7 +52,7 @@ public class VoiceTest extends BaseTest {
     }
 
     @Test(priority = 17)
-    @Story("Voice History")
+    @Story("Voice History - Positive TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get voice history — expects 200 OK and non-empty array")
     public void testGetVoiceHistory() {
@@ -68,7 +68,7 @@ public class VoiceTest extends BaseTest {
     }
 
     @Test(priority = 18)
-    @Story("Get Voice by ID")
+    @Story("Get Voice by ID - Positive TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get voice record by valid ID — expects 200 OK and correct voiceID")
     public void testGetVoiceById() {
@@ -85,7 +85,7 @@ public class VoiceTest extends BaseTest {
     }
 
     @Test(priority = 19)
-    @Story("Delete Voice")
+    @Story("Delete Voice - Positive TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Delete voice record by valid ID — expects 200 OK and success message")
     public void testDeleteVoice() {
@@ -101,7 +101,7 @@ public class VoiceTest extends BaseTest {
     }
 
     @Test(priority = 20)
-    @Story("Transcribe Audio")
+    @Story("Transcribe Audio - Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Transcribe wrong extension (MP3) — expects 400 Bad Request")
     public void testTranscribeWrongExtension() {
@@ -121,7 +121,7 @@ public class VoiceTest extends BaseTest {
     }
 
     @Test(priority = 21)
-    @Story("Get Audio File")
+    @Story("Get Audio File - Negative TC")
     @Severity(SeverityLevel.MINOR)
     @Description("Get audio by wrong filename — expects 400 or 404")
     public void testGetAudioWrongFilename() {
@@ -136,7 +136,7 @@ public class VoiceTest extends BaseTest {
 
 
     @Test(priority = 22)
-    @Story("Transcribe Audio")
+    @Story("Transcribe Audio - Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Transcribe with wrong language type — expects 400 Bad Request")
     public void testTranscribeWrongLanguage() {
