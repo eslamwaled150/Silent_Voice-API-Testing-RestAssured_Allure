@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.*;
 public class SignTest extends BaseTest {
 
     @Test(priority = 10)
-    @Story("Save Sign")
+    @Story("Save Sign - Positive TC")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Save a sign sentence — expects 200 OK and signID returned")
     public void testSaveSign() {
@@ -34,7 +34,7 @@ public class SignTest extends BaseTest {
     }
 
     @Test(priority = 11)
-    @Story("Sign History")
+    @Story("Sign History - Positive TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get sign history — expects 200 OK and non-empty array")
     public void testGetSignHistory() {
@@ -50,7 +50,7 @@ public class SignTest extends BaseTest {
     }
 
     @Test(priority = 12)
-    @Story("Get Sign by ID")
+    @Story("Get Sign by ID - Positive TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Get sign by valid ID — expects 200 OK and correct signID")
     public void testGetSignById() {
@@ -66,7 +66,7 @@ public class SignTest extends BaseTest {
     }
 
     @Test(priority = 13)
-    @Story("Get Sign by ID")
+    @Story("Get Sign by ID - Negative TC")
     @Severity(SeverityLevel.MINOR)
     @Description("Get sign by non-existing ID (99999) — expects 400 or 404")
     public void testGetSignInvalidId() {
@@ -81,7 +81,7 @@ public class SignTest extends BaseTest {
     }
 
     @Test(priority = 14)
-    @Story("Sign History")
+    @Story("Sign History - Negative TC")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Get sign history without token — expects 401 Unauthorized")
     public void testGetSignHistoryNoToken() {
@@ -95,7 +95,7 @@ public class SignTest extends BaseTest {
     }
 
     @Test(priority = 15)
-    @Story("Save Sign")
+    @Story("Save Sign - Negative TC")
     @Severity(SeverityLevel.NORMAL)
     @Description("Save sign with empty sentence — expects 400 Bad Request")
     public void testSaveSignEmptySentence() {
