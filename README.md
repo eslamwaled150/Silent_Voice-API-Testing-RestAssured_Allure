@@ -8,134 +8,138 @@
 
 ## 👥 Team Members
 
-| Name | Role |
-|------|------|
-| Islam Waled | QA Engineer |
+| Name            | Role        |
+| --------------- | ----------- |
+| Islam Waled     | QA Engineer |
 | Shrouk Elkassas | QA Engineer |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| Java | 17 | Programming language |
-| RestAssured | 5.4.0 | API testing framework |
-| TestNG | 7.9.0 | Test execution & management |
-| Allure | 2.27.0 | Test reporting |
-| Jackson | 2.17.1 | POJO serialization / deserialization |
-| Log4j2 | 2.23.1 | Professional logging |
-| Apache POI | 5.2.5 | Excel data-driven testing |
-| Maven | — | Build & dependency management |
-| GitHub Actions | — | CI/CD pipeline |
+| Tool           | Version | Purpose                       |
+| -------------- | ------- | ----------------------------- |
+| Java           | 17      | Programming language          |
+| RestAssured    | 5.4.0   | API testing framework         |
+| TestNG         | 7.9.0   | Test execution & management   |
+| Allure         | 2.27.0  | Test reporting                |
+| Maven          | —       | Build & dependency management |
+| GitHub Actions | —       | CI/CD pipeline                |
+| Postman/Newman | —       | Manual testing & HTML reports |
 
 ---
 
 ## 📁 Project Structure
 
-    Silent_Voice-API-Testing-RestAssured_Allure/
-    ├── .github/
-    │   └── workflows/
-    │       └── ci.yml                          # GitHub Actions workflow
-    └── API_ITI_Silent_Voice_Allure/
-        ├── src/
-        │   └── test/
-        │       ├── java/
-        │       │   ├── Pages/
-        │       │   │   ├── Auth.java               # POJO model — Auth requests
-        │       │   │   ├── Sign.java               # POJO model — Sign requests
-        │       │   │   └── Voice.java              # POJO model — Voice requests
-        │       │   ├── tests/
-        │       │   │   ├── BaseTest.java           # Base config, setup & login
-        │       │   │   ├── AuthTest.java           # Authentication test cases
-        │       │   │   ├── SignTest.java           # Sign language test cases
-        │       │   │   └── VoiceTest.java          # Voice transcription test cases
-        │       │   └── utils/
-        │       │       ├── DataLoader.java         # JSON test data reader
-        │       │       └── ExcelDataLoader.java    # Excel test data reader
-        │       └── resources/
-        │           ├── data/
-        │           │   ├── auth_data.json          # Auth test data
-        │           │   ├── sign_data.json          # Sign test data
-        │           │   ├── voice_data.json         # Voice test data
-        │           │   └── test_data.xlsx          # Excel data-driven test file
-        │           ├── koko.wav                    # Sample WAV file for testing
-        │           ├── 0703.mp3                    # Sample MP3 file (negative test)
-        │           ├── allure.properties           # Allure configuration
-        │           └── log4j2.xml                  # Logging configuration
-        ├── pom.xml                                 # Maven dependencies
-        ├── testng.xml                              # TestNG suite configuration
-        └── run_tests.bat                           # Local test runner script
+```
+Silent_Voice-API-Testing-RestAssured_Allure/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                          # GitHub Actions workflow
+└── API_ITI_Silent_Voice_Allure/
+    ├── src/
+    │   └── test/
+    │       ├── java/
+    │       │   ├── Pages/
+    │       │   │   ├── Auth.java           # POJO model — Auth requests
+    │       │   │   ├── Sign.java           # POJO model — Sign requests
+    │       │   │   └── Voice.java          # POJO model — Voice requests
+    │       │   └── tests/
+    │       │       ├── BaseTest.java       # Base config, setup & auto-login
+    │       │       ├── AuthTest.java       # Authentication test cases
+    │       │       ├── SignTest.java       # Sign language test cases
+    │       │       └── VoiceTest.java      # Voice transcription test cases
+    │       └── resources/
+    │           ├── koko.wav                # Sample WAV file (positive tests)
+    │           ├── 0703.mp3                # Sample MP3 file (negative tests)
+    │           ├── allure.properties       # Allure configuration
+    │           └── log4j2.xml              # Logging configuration
+    └── pom.xml                             # Maven dependencies
+```
 
 ---
 
-## 🏗️ Design Patterns & Architecture
+## 🏗️ Architecture Notes
 
-| Pattern | Implementation |
-|---------|---------------|
-| **POJO + Jackson** | Request bodies modeled as Java objects, auto-serialized to JSON |
-| **API Client Layer** | `BaseTest` centralizes `RequestSpecification` setup |
-| **Data-Driven Testing** | Test data loaded from JSON files and Excel sheets via `@DataProvider` |
-| **Professional Logging** | Log4j2 replaces all `System.out.println` with timestamped log levels |
-| **Page Object (API)** | `Pages/` package separates data models from test logic |
+- **BaseTest** holds shared state: `token`, `signID`, `voiceID`, `registeredEmail`.
+- A `@BeforeClass` in `BaseTest` auto-logs in using a fixed pre-registered account (`FIXED_EMAIL`) so that `SignTest` and `VoiceTest` can run independently of `AuthTest`.
+- **Token chaining** is handled via TestNG `dependsOnMethods` annotations to ensure correct execution order within `AuthTest`.
+- A **fixed OTP** (`FIXED_OTP`) is used in the automated environment to bypass real email delivery and ensure repeatable test execution.
 
 ---
 
 ## 🧪 Test Coverage
 
-### 🔐 Authentication (`AuthTest`) — 10 Test Cases
+### 🔐 Authentication (`AuthTest`) — 9 Test Cases
 
-| # | Test Case | Type | Expected Result |
-|---|-----------|------|-----------------|
-| 1 | Register with valid data | ✅ Positive | `200` + OTP message |
-| 2 | Confirm email with valid OTP | ✅ Positive | `200` + confirmed |
-| 3 | Login with valid credentials | ✅ Positive | `200` + JWT token |
-| 4 | Forgot password with valid email | ✅ Positive | `200` OK |
-| 5 | Register with duplicate email | ❌ Negative | `400` |
-| 6 | Register with exceeded fName length | ❌ Negative | `400` |
-| 7 | Register with missing required fields | ❌ Negative | `400` |
-| 8 | Confirm email with wrong OTP | ❌ Negative | `400` |
-| 9 | Login with wrong password | ❌ Negative | `400` or `401` |
-| 10 | Login with non-existing email | ❌ Negative | `400` or `404` |
+| # | Test Case                          | Type        | Expected Result      |
+|---|------------------------------------|-------------|----------------------|
+| 1 | Register with valid data           | ✅ Positive  | `200` + OTP message  |
+| 2 | Confirm email with fixed OTP       | ✅ Positive  | `200` + confirmed    |
+| 3 | Login with valid credentials       | ✅ Positive  | `200` + JWT token    |
+| 4 | Forgot password with valid email   | ✅ Positive  | `200`                |
+| 5 | Login with wrong password          | ❌ Negative  | `400` or `401`       |
+| 6 | Register with duplicate email      | ❌ Negative  | `400`                |
+| 7 | Login with non-existing email      | ❌ Negative  | `400` or `404`       |
+| 8 | Register with exceeded name length | ❌ Negative  | `400`                |
+| 9 | Confirm email with wrong OTP       | ❌ Negative  | `400`                |
+
+---
 
 ### 🤟 Sign Language (`SignTest`) — 6 Test Cases
 
-| # | Test Case | Type | Expected Result |
-|---|-----------|------|-----------------|
-| 1 | Save valid sign sentence (parameterized) | ✅ Positive | `200` + signID |
-| 2 | Get sign history | ✅ Positive | `200` + array |
-| 3 | Get sign by valid ID | ✅ Positive | `200` + correct signID |
-| 4 | Save invalid sentences (parameterized) | ❌ Negative | `400` |
-| 5 | Get sign by invalid ID | ❌ Negative | `400` or `404` |
-| 6 | Get sign history without token | ❌ Negative | `401` |
+| #  | Test Case                      | Type        | Expected Result         |
+|----|--------------------------------|-------------|-------------------------|
+| 10 | Save a sign sentence           | ✅ Positive  | `200` + signID          |
+| 11 | Get sign history               | ✅ Positive  | `200` + non-empty array |
+| 12 | Get sign by valid ID           | ✅ Positive  | `200` + correct signID  |
+| 13 | Get sign by invalid ID         | ❌ Negative  | `400` or `404`          |
+| 14 | Get sign history without token | ❌ Negative  | `401`                   |
+| 15 | Save sign with empty sentence  | ❌ Negative  | `400`                   |
 
-### 🎙️ Voice Transcription (`VoiceTest`) — 6 Test Cases
+---
 
-| # | Test Case | Type | Expected Result |
-|---|-----------|------|-----------------|
-| 1 | Transcribe valid WAV file | ✅ Positive | `200` + voiceID |
-| 2 | Get voice history | ✅ Positive | `200` + array |
-| 3 | Get voice by valid ID | ✅ Positive | `200` + correct voiceID |
-| 4 | Transcribe wrong extension (MP3) | ❌ Negative | `400` |
-| 5 | Transcribe invalid language (parameterized) | ❌ Negative | `400` |
-| 6 | Get audio with invalid filename (parameterized) | ❌ Negative | `400` or `404` |
+### 🎙️ Voice Transcription (`VoiceTest`) — 7 Test Cases
+
+| #  | Test Case                           | Type        | Expected Result                    |
+|----|-------------------------------------|-------------|------------------------------------|
+| 16 | Transcribe valid WAV file           | ✅ Positive  | `200` + voiceID                    |
+| 17 | Get voice history                   | ✅ Positive  | `200` + non-empty array            |
+| 18 | Get voice by valid ID               | ✅ Positive  | `200` + correct voiceID            |
+| 19 | Delete voice record                 | ✅ Positive  | `200` + success message            |
+| 20 | Transcribe wrong extension (MP3)    | ❌ Negative  | `400`                              |
+| 21 | Get audio by wrong filename         | ❌ Negative  | `400` or `404`                     |
+| 22 | Transcribe with wrong language code | ❌ Negative  | `400` + language validation message|
 
 ---
 
 ## 📊 Test Results Summary
 
-| Module | Total | ✅ Positive | ❌ Negative |
-|--------|-------|------------|------------|
-| Auth | 10 | 4 | 6 |
-| Sign | 6 | 3 | 3 |
-| Voice | 6 | 3 | 3 |
-| **Total** | **22** | **10** | **12** |
+| Module    | Total  | ✅ Positive | ❌ Negative |
+| --------- | ------ | ----------- | ----------- |
+| Auth      | 9      | 4           | 5           |
+| Sign      | 6      | 3           | 3           |
+| Voice     | 7      | 4           | 3           |
+| **Total** | **22** | **11**      | **11**      |
 
 ---
 
-## 🎥 Test Run Recording
+## 🐛 Bugs Discovered During Testing
 
-▶️ [Watch the full test run on Google Drive](https://drive.google.com/file/d/1LAF5JA-i1hGLL-4GoHcbuTFTT8Dq0hcY/view?usp=drive_link)
+| Severity   | Endpoint                  | Description                                                                 |
+|------------|---------------------------|-----------------------------------------------------------------------------|
+| 🔴 CRITICAL | `POST /api/Auth/register` | Returns `400` when Azure DB monthly free tier limit is reached (infrastructure issue, not a code bug) |
+| 🟠 HIGH     | `GET /api/Sign/history`   | Intermittently returns `400` due to transient DB failure                    |
+| 🟠 HIGH     | `DELETE /api/Sign/{id}`   | `NullReferenceException` thrown — value cannot be null, causes `400` on delete |
+
+---
+
+## 🎥 Demo Recordings
+
+| Type       | Link |
+|------------|------|
+| Automation | [Watch Automation Demo](https://drive.google.com/file/d/1tXuGXQmJSmcgYEvYXnQcbptQzD5WMT2l/view?usp=sharing) |
+| Manual     | *(Manual Postman demo link)* |
 
 ---
 
@@ -148,19 +152,25 @@
 
 ### Run All Tests
 
-    cd API_ITI_Silent_Voice_Allure
-    mvn clean test
+```bash
+cd API_ITI_Silent_Voice_Allure
+mvn clean test
+```
 
-### Generate & View Allure Report
+### Generate & View Allure Report Locally
 
-    .allure\allure-2.27.0\bin\allure.bat serve target\allure-results
+```bash
+.allure\allure-2.27.0\bin\allure.bat serve target\allure-results
+```
 
 ---
 
-## ⚙️ CI/CD
+## ⚙️ CI/CD Pipeline
 
-This project uses **GitHub Actions** to automatically run tests on every push or pull request to `main`, and on a **daily schedule at 3:00 PM Cairo time**.
+This project uses **GitHub Actions** to automatically run all tests on every push to `main`.
 
-The Allure report is published to **GitHub Pages** after each run.
+Flow: `Push to GitHub` → `GitHub Actions triggers` → `Maven runs all tests` → `Allure generates report` → `Published to GitHub Pages`
 
-🔗 **Live Report:** [https://eslamwaled150.github.io/Silent_Voice-API-Testing-RestAssured_Allure/](https://eslamwaled150.github.io/Silent_Voice-API-Testing-RestAssured_Allure/)
+🔗 **Live Allure Report:** https://eslamwaled150.github.io/Silent_Voice-API-Testing-RestAssured_Allure/
+
+🔗 **Live Newman Report:** https://eslamwaled150.github.io/silent-voice-api/newman-report.html
