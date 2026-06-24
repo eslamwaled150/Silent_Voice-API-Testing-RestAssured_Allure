@@ -2,7 +2,8 @@
 
 > An automated API testing suite for the **Silent Voice** platform — a system that helps people with hearing and speech disabilities by transcribing voice to text and converting text to sign language.
 
-**API Under Test:** [http://silentvoice.runasp.net](http://silentvoice.runasp.net)
+**API Under Test:** `http://silentvoice.runasp.net`
+
 ---
 
 ## 👥 Team Members
