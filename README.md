@@ -99,7 +99,7 @@ Silent_Voice-API-Testing-RestAssured_Allure/
 
 ---
 
-### 🎙️ Voice Transcription (`VoiceTest`) — 7 Test Cases
+### 🎙️ Voice Transcription (`VoiceTest`) — 8 Test Cases
 
 | #  | Test Case                           | Type        | Expected Result                    |
 |----|-------------------------------------|-------------|------------------------------------|
