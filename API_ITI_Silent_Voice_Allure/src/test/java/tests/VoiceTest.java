@@ -153,5 +153,19 @@ public class VoiceTest extends BaseTest {
         log.info("Wrong language type correctly rejected");
     }
 
+   
+    @Test(priority = 23)
+    @Story("Delete Voice - Negative TC") 
+    @Severity(SeverityLevel.NORMAL)
+@Description("Delete voice record with invalid ID — expects 400 or 404")
+public void testDeleteVoiceInvalidId() {
+    given()
+            .header("Authorization", "Bearer " + token)
+            .when()
+            .delete("/api/Voice/99999")
+            .then()
+            .statusCode(anyOf(equalTo(400), equalTo(404)));
+    log.info("Delete with invalid ID correctly rejected");
+}
 
 }
