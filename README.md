@@ -110,6 +110,7 @@ Silent_Voice-API-Testing-RestAssured_Allure/
 | 20 | Transcribe wrong extension (MP3)    | ❌ Negative  | `400`                              |
 | 21 | Get audio by wrong filename         | ❌ Negative  | `400` or `404`                     |
 | 22 | Transcribe with wrong language code | ❌ Negative  | `400` + language validation message|
+| 23 | Delete voice record with invalid ID | ❌ Negative  | `400` or `404`                     |
 
 ---
 
@@ -119,8 +120,8 @@ Silent_Voice-API-Testing-RestAssured_Allure/
 | --------- | ------ | ----------- | ----------- |
 | Auth      | 9      | 4           | 5           |
 | Sign      | 6      | 3           | 3           |
-| Voice     | 7      | 4           | 3           |
-| **Total** | **22** | **11**      | **11**      |
+| Voice     | 7      | 4           | 4           |
+| **Total** | **23** | **11**      | **12**      |
 
 ---
 
