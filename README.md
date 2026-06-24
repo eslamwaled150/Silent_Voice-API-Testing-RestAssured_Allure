@@ -120,7 +120,7 @@ Silent_Voice-API-Testing-RestAssured_Allure/
 | --------- | ------ | ----------- | ----------- |
 | Auth      | 9      | 4           | 5           |
 | Sign      | 6      | 3           | 3           |
-| Voice     | 7      | 4           | 4           |
+| Voice     | 8      | 4           | 4           |
 | **Total** | **23** | **11**      | **12**      |
 
 ---
